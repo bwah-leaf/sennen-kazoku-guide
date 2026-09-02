@@ -1,0 +1,29 @@
+# 게임 및 에뮬레이터 파일은 공략 저장소에 올리지 않는다.
+*.gba
+*.sav
+*.ss?
+*.mss
+*.ips
+*.ups
+*.bps
+*.bin
+*.bmp
+*.png
+*.gif
+*.jpg
+*.jpeg
+*.pal
+*.log
+
+# 로컬 미리보기 실행 도구는 공개 저장소에 올리지 않는다.
+run_preview.bat
+run_predictor.bat
+
+# 로컬 Jekyll 결과
+_site/
+.jekyll-cache/
+.sass-cache/
+Gemfile.lock
+
+# 원문·제어코드가 포함된 내부 분석 백업은 공개 저장소에서 제외한다.
+data/events_with_source_legacy.json

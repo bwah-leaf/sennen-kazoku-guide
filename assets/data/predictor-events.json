@@ -1,0 +1,49 @@
+{
+  "schema": "sennen-kazoku-event-predictor-definitions",
+  "schema_version": 1,
+  "field_catalog": {
+    "age": {"label": "나이", "type": "number", "minimum": 0, "maximum": 99, "default": 24},
+    "attribute_2": {"label": "속성 #2", "type": "number", "minimum": 0, "maximum": 65535, "default": 1200, "status": "미명명"},
+    "attribute_0": {"label": "애정 붐 미터", "code": "속성 #0 · +0x50", "type": "number", "minimum": 0, "maximum": 5000, "default": 0},
+    "attribute_1": {"label": "독신 붐 미터", "code": "속성 #1 · +0x52", "type": "number", "minimum": 0, "maximum": 5000, "default": 0},
+    "attribute_2_arrow": {"label": "마이웨이 미터", "code": "속성 #2 · +0x54", "type": "number", "minimum": 0, "maximum": 5000, "default": 0},
+    "attribute_3": {"label": "대망 미터", "code": "속성 #3 · +0x56", "type": "number", "minimum": 0, "maximum": 5000, "default": 0},
+    "attribute_5": {"label": "현재 관심 몰입도", "code": "속성 #5 · +0x5B", "type": "number", "minimum": 0, "maximum": 255, "default": 82},
+    "attribute_6": {"label": "꿈 계승 보조값", "code": "속성 #6 · +0x5D", "type": "number", "minimum": 0, "maximum": 255, "default": 0},
+    "immersion": {"label": "현재 몰입도", "code": "+0x5B", "type": "number", "minimum": 0, "maximum": 255, "default": 82},
+    "relationship_code": {"label": "관계/상태 코드", "type": "select", "default": "15", "options": [{"value": "15", "label": "15 · 배우자 조건 충족"}, {"value": "0", "label": "기타 · 조건 미충족"}]}
+  },
+  "arrows": {
+    "none": {"label": "사용하지 않음", "effects": {}, "description": "현재 상태 유지"},
+    "encourage": {"label": "힘내라의 화살", "effects": {"immersion": {"operation": "add_saturating", "value": 95, "maximum": 255}, "attribute_5": {"operation": "add_saturating", "value": 95, "maximum": 255}}, "description": "현재 관심 몰입도 +95"},
+    "calm": {"label": "진정해의 화살", "effects": {"immersion": {"operation": "set", "value": 0}, "attribute_5": {"operation": "set", "value": 0}}, "description": "현재 관심 몰입도를 0으로 초기화"},
+    "easygoing": {"label": "태평함 붐의 화살", "effects": {}, "description": "편안함·놀이 계열 상태 부여"},
+    "effort": {"label": "노력 붐의 화살", "effects": {}, "description": "노력 계열 전역 미터 +64"},
+    "love": {"label": "애정 붐의 화살", "effects": {"attribute_0": {"operation": "add_saturating", "value": 1000, "maximum": 5000}}, "description": "애정 붐 미터 +1000"},
+    "single": {"label": "독신 붐의 화살", "effects": {"attribute_1": {"operation": "add_saturating", "value": 1000, "maximum": 5000}}, "description": "독신 붐 미터 +1000"},
+    "myway": {"label": "마이웨이의 화살", "effects": {"attribute_2_arrow": {"operation": "add_saturating", "value": 1000, "maximum": 5000}}, "description": "마이웨이 미터 +1000"},
+    "ambition": {"label": "대망의 화살", "effects": {"attribute_3": {"operation": "add_saturating", "value": 1000, "maximum": 5000}}, "description": "대망 미터 +1000"},
+    "legacy_dream": {"label": "선대의 꿈의 화살", "effects": {"attribute_6": {"operation": "add_saturating", "value": 128, "maximum": 255}}, "description": "꿈 계승 보조값 +128"},
+    "encounter": {"label": "만남의 예감의 화살", "effects": {}, "description": "만남·연애 관계 상태 갱신"},
+    "communication_marriage": {"label": "통신 결혼의 화살", "effects": {}, "description": "지정 상대·결혼 관계 상태 갱신"}
+  },
+  "events": [
+    {
+      "id": "marriage-reason",
+      "label": "이 사람과 결혼한 이유로 고민이야…",
+      "evaluator": "dual_age_threshold",
+      "fields": ["age", "attribute_2", "immersion", "relationship_code"],
+      "direct_arrow_fields": [],
+      "gate": {"field": "relationship_code", "operator": "equals", "value": "15", "description": "배우자 관계 선행 조건"},
+      "thresholds": {
+        "low": {"field": "attribute_2", "age_multiplier": 33, "constant": 100, "route_label": "난수 1/4 경로"},
+        "high": {"field": "attribute_2", "age_multiplier": 48, "constant": 100, "route_label": "난수 3/4 경로"}
+      },
+      "branches": [
+        {"kind": "positive", "event_id": "sk-event-2633", "label": "좋아하는 데 이유 따위 필요 없어！", "summary": "결혼한 것을 당당하게 여기는 긍정 결과"},
+        {"kind": "fallback", "event_id": "sk-event-2634", "label": "결혼한 것을 후회해…", "summary": "좋은 결과가 선택되지 않았을 때 남는 부정 결과"}
+      ],
+      "evidence": {"condition_function": "0x081AE411", "positive_predicate": "0x081AB9D1", "fallback_predicate": "0x081ABA41", "status": "정적 확인"}
+    }
+  ]
+}

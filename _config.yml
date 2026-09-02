@@ -1,0 +1,11 @@
+title: 천년가족 한국어 공략 위키
+description: GBA 천년가족의 이벤트와 시스템을 정리하는 한국어 공략
+lang: ko-KR
+theme: minima
+markdown: kramdown
+permalink: pretty
+exclude:
+  - data
+  - README.md
+  - Gemfile
+  - Gemfile.lock

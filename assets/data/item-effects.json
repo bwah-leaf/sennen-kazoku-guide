@@ -1,0 +1,190 @@
+{
+  "schema": "sennen-kazoku-item-effects",
+  "schema_version": 1,
+  "description": "예정 이벤트 결과 계산에 영향을 줄 수 있는 아이템 효과",
+  "ability_ranks": [
+    [
+      "F",
+      0,
+      799
+    ],
+    [
+      "D",
+      800,
+      1599
+    ],
+    [
+      "C",
+      1600,
+      2399
+    ],
+    [
+      "B",
+      2400,
+      3199
+    ],
+    [
+      "A",
+      3200,
+      3999
+    ],
+    [
+      "S",
+      4000,
+      4799
+    ],
+    [
+      "SS",
+      4800,
+      5000
+    ]
+  ],
+  "mood_levels": [
+    [
+      "1단계",
+      0,
+      47,
+      24
+    ],
+    [
+      "2단계",
+      48,
+      95,
+      72
+    ],
+    [
+      "3단계",
+      96,
+      159,
+      128
+    ],
+    [
+      "4단계",
+      160,
+      207,
+      184
+    ],
+    [
+      "5단계",
+      208,
+      255,
+      232
+    ]
+  ],
+  "items": [
+    {
+      "key": "none",
+      "id": null,
+      "label": "사용하지 않음",
+      "description": "아이템을 사용하지 않은 현재 수치로 계산합니다.",
+      "calculation": {
+        "operation": "none"
+      },
+      "certainty": "static_confirmed"
+    },
+    {
+      "key": "intelligence_ring",
+      "id": 15,
+      "label": "지력의 고리",
+      "description": "선택한 인물의 지력이 한 등급 오릅니다.",
+      "calculation": {
+        "operation": "ability_rank_up",
+        "attribute": 0,
+        "amount": 800,
+        "maximum": 5000
+      },
+      "certainty": "static_confirmed",
+      "result_text_offset": "0x00253B18"
+    },
+    {
+      "key": "stamina_ring",
+      "id": 16,
+      "label": "체력의 고리",
+      "description": "선택한 인물의 체력이 한 등급 오릅니다.",
+      "calculation": {
+        "operation": "ability_rank_up",
+        "attribute": 1,
+        "amount": 800,
+        "maximum": 5000
+      },
+      "certainty": "static_confirmed",
+      "result_text_offset": "0x00253AAC"
+    },
+    {
+      "key": "charm_ring",
+      "id": 17,
+      "label": "매력의 고리",
+      "description": "선택한 인물의 매력이 한 등급 오릅니다.",
+      "calculation": {
+        "operation": "ability_rank_up",
+        "attribute": 2,
+        "amount": 800,
+        "maximum": 5000
+      },
+      "certainty": "static_confirmed",
+      "result_text_offset": "0x00253B84"
+    },
+    {
+      "key": "luck_ring",
+      "id": 18,
+      "label": "운의 고리",
+      "description": "선택한 인물의 운이 한 등급 오릅니다.",
+      "calculation": {
+        "operation": "ability_rank_up",
+        "attribute": 3,
+        "amount": 800,
+        "maximum": 5000
+      },
+      "certainty": "static_confirmed",
+      "result_text_offset": "0x00253BF0"
+    },
+    {
+      "key": "happiness_box",
+      "id": 14,
+      "label": "행복 상자",
+      "description": "가족 무드가 한 단계 좋아집니다.",
+      "calculation": {
+        "operation": "mood_stage_up",
+        "key": "global_0"
+      },
+      "certainty": "effect_confirmed_stage_mapping",
+      "result_text_offset": "0x00253A24"
+    },
+    {
+      "key": "heart_fruit",
+      "id": 12,
+      "label": "하트 열매",
+      "description": "선택한 인물의 하트를 1개 회복합니다.",
+      "calculation": {
+        "operation": "unmodeled",
+        "reason": "현재 예정 상태 추출 데이터에 하트 잔량 입력키가 연결되지 않음"
+      },
+      "certainty": "effect_confirmed",
+      "result_text_offset": "0x002538B0"
+    },
+    {
+      "key": "poison_heart_fruit",
+      "id": 13,
+      "label": "독 하트 열매",
+      "description": "선택한 인물의 하트를 모두 없앱니다.",
+      "calculation": {
+        "operation": "unmodeled",
+        "reason": "현재 예정 상태 추출 데이터에 하트 잔량 입력키가 연결되지 않음"
+      },
+      "certainty": "effect_confirmed",
+      "result_text_offset": "0x0025391C"
+    },
+    {
+      "key": "love_ring",
+      "id": 19,
+      "label": "사랑의 고리",
+      "description": "선택한 인물과 연인의 애정 관계가 크게 깊어집니다. 연인이 없으면 사용할 수 없습니다.",
+      "calculation": {
+        "operation": "unmodeled",
+        "reason": "상대별 관계값과 사용 대상 연결이 아직 공개 예측 입력에 없음"
+      },
+      "certainty": "effect_confirmed",
+      "result_text_offset": "0x00253C88"
+    }
+  ]
+}

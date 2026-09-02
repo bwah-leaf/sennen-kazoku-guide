@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script>
+    if (window.location.protocol === "file:") {
+      window.location.replace("http://127.0.0.1:8765/predictor.html?v=conditions-hide1");
+    }
+  </script>
+  <meta name="description" content="천년가족의 예정 상태를 검색하고 화살 사용 전후의 발생 가능한 이벤트를 비교하는 로컬 예측기">
+  <title>천년가족 예정 상태 결과 예측 — 로컬 미리보기</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=most-likely1">
+</head>
+<body class="guide-shell">
+  <header class="guide-header">
+    <nav class="site-nav" aria-label="주요 페이지">
+      <a href="preview.html">전체 이벤트 도감</a>
+      <a class="is-current" href="predictor.html">예정 이벤트 결과 예측</a>
+      <a href="family-predictor.html">세이브 파일로 가족 예측</a>
+    </nav>
+    <p class="eyebrow">PLANNED STATE OUTCOME PREVIEW</p>
+    <h1>예정 상태 결과 예측</h1>
+    <p>게임 화면에 표시된 예정 상태를 검색하고, 아이템·화살 사용 전후에 발생 가능한 결과 이벤트와 실행 후 변화를 비교합니다.</p>
+    <p class="event-help"><b>읽는 순서:</b> 예정 상태 선택 → 현재 수치 입력 → 아이템과 화살 선택 → 결과별 조건 변화를 확인하세요. 확인되지 않은 확률은 임의로 만들지 않습니다.</p>
+  </header>
+
+  <main class="predictor-layout">
+    <section class="predictor-panel input-panel">
+      <div class="section-heading">
+        <span>01</span>
+        <div><h2>예정 상태</h2><p>게임의 가족 화면 아래쪽에 표시되는 문구를 검색합니다.</p></div>
+      </div>
+      <label class="field-label" for="event-filter">예정 상태명 검색</label>
+      <input id="event-filter" class="wide-control" type="search" placeholder="예: 바의 마담에게 푹 빠졌어">
+      <label class="field-label" for="planned-event">예정 상태 선택</label>
+      <select id="planned-event" class="wide-control"><option>예정 상태 데이터를 읽는 중…</option></select>
+      <div id="event-links" class="event-link-row"></div>
+
+      <div class="section-heading compact">
+        <span>02</span>
+        <div><h2>화살 사용 전 상태</h2><p>능력치는 F~SS 등급, 가족 무드는 1~5단계로 고릅니다. 주택·자동차 등급과 이미지 유형 같은 코드형 항목은 목록에서 선택합니다.</p></div>
+      </div>
+      <div id="dynamic-fields" class="input-grid"></div>
+
+      <fieldset id="item-choice" class="item-choice">
+        <legend>실행 전에 사용할 아이템</legend>
+        <label class="field-label" for="prediction-item">아이템 선택
+          <select id="prediction-item" class="wide-control"><option>아이템 데이터를 읽는 중…</option></select>
+        </label>
+        <p id="item-effect-note" class="item-effect-note"></p>
+      </fieldset>
+
+      <fieldset id="arrow-choice" class="arrow-choice">
+        <legend>실행 전에 사용할 화살</legend>
+      </fieldset>
+      <button id="calculate" class="primary-button" type="button">예정 결과 다시 계산</button>
+    </section>
+
+    <section class="predictor-panel result-panel" aria-live="polite">
+      <div class="section-heading">
+        <span>03</span>
+        <div><h2>발생 가능한 이벤트</h2><p id="prediction-caption">예정 상태와 화살을 선택하면 가능한 결과를 비교합니다.</p></div>
+      </div>
+      <div id="prediction-summary" class="prediction-summary"></div>
+      <section id="selection-flow" class="selection-flow" aria-label="결과 선택 순서"></section>
+      <div id="branch-results" class="branch-results"></div>
+
+      <details class="evidence-box" open>
+        <summary>예정 상태 연결 근거</summary>
+        <div id="evidence-content"></div>
+      </details>
+    </section>
+  </main>
+
+  <section class="privacy-note">
+    <strong>로컬 계산</strong>
+    <p>이 테스트 페이지는 입력값을 서버로 보내지 않습니다. ROM 파일도 포함하거나 업로드하지 않습니다.</p>
+  </section>
+  <section class="publication-notice">
+    <strong>비공식 팬 공략</strong>
+    <p>게임과 관련 명칭의 권리는 각 권리자에게 있습니다. 이 사이트는 ROM·원본 그래픽·세이브 파일을 배포하지 않습니다. 공개 내용에 관한 권리자의 요청은 공개 저장소의 Issues를 통해 접수하며, 확인 후 수정 또는 공개 중단을 검토합니다.</p>
+  </section>
+  <script>
+    window.PREDICTOR_DATA_URL = "assets/data/predictor-events.json?v=schema3";
+    window.PLANNED_STATES_URL = "assets/data/planned-states.json?v=all-probability2";
+    window.ITEM_EFFECTS_URL = "assets/data/item-effects.json?v=items1";
+    window.EVENT_SCRIPTS_URL = "assets/data/event-scripts-ko.json?v=particles1";
+  </script>
+  <script src="assets/js/event-script-modal.js?v=reader-scroll1"></script>
+  <script src="assets/js/event-predictor.js?v=items1"></script>
+</body>
+</html>

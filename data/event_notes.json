@@ -1,0 +1,72 @@
+{
+  "schema": "sennen-kazoku-event-notes",
+  "schema_version": 1,
+  "_instructions": {
+    "key": "events 객체에 sk-event-0001 같은 event_id를 키로 사용",
+    "editable_fields": [
+      "category",
+      "trigger_summary",
+      "trigger_status",
+      "requirements",
+      "effects",
+      "strategy",
+      "verification_notes",
+      "screenshots",
+      "guide_condition",
+      "publish"
+    ],
+    "trigger_status_values": [
+      "unknown",
+      "inferred_from_text",
+      "static_confirmed",
+      "runtime_confirmed",
+      "conflicting"
+    ],
+    "warning": "조사 마커·제어코드는 원본 번역 JSON에서만 수정하고 이 파일에는 설명만 기록"
+  },
+  "_example": {
+    "sk-event-0001": {
+      "category": "가족·세대",
+      "trigger_summary": "발생 조건을 한 문장으로 요약",
+      "trigger_status": "runtime_confirmed",
+      "requirements": ["필요 조건 1", "필요 조건 2"],
+      "effects": ["발생 결과"],
+      "strategy": "공략 팁",
+      "verification_notes": "확인에 사용한 상태와 관찰 결과",
+      "screenshots": ["assets/images/events/example.png"],
+      "publish": true
+    }
+  },
+  "events": {
+    "sk-event-0624": {
+      "category": "성장·진로",
+      "trigger_summary": "지력과 체력이 나이에 따른 기준을 넘은 인물에게 확률적으로 발생하는 교사 지망 이벤트",
+      "trigger_status": "static_confirmed",
+      "requirements": [
+        "MAX 이벤트 공통 내부 게이지 조건을 충족한 인물",
+        "지력 판정과 체력 판정을 모두 통과",
+        "두 능력치 판정 뒤 추가 1/5 확률 판정 통과"
+      ],
+      "effects": [
+        "대상 인물이 멋진 선생님이 되는 것을 인생의 목표로 정함"
+      ],
+      "strategy": "지력과 체력이 높을수록 후보 판정을 통과할 가능성이 커진다. 두 능력치 모두 높은 기준 이상이어도 마지막 1/5 판정은 별도로 남는다.",
+      "verification_notes": "0x081781A1의 호출 대상을 직접 확인. 지력 판정 0x08235DB1, 체력 판정 0x08236141, 추가 1/5 판정 0x082409D9.",
+      "guide_condition": {
+        "certainty": "ROM 정적 확인",
+        "summary": "지력과 체력을 각각 나이 기준으로 판정한 뒤, 추가 1/5 확률에 성공하면 이 이벤트 후보가 된다.",
+        "details": [
+          "지력이 ‘나이×109＋100’ 이상이면 지력 판정 확률 13/16",
+          "지력이 ‘나이×76＋100’ 이상이고 높은 기준 미만이면 지력 판정 확률 1/4",
+          "체력이 ‘나이×134＋100’ 이상이면 체력 판정 확률 13/16",
+          "체력이 ‘나이×93＋100’ 이상이고 높은 기준 미만이면 체력 판정 확률 1/4",
+          "둘 중 하나라도 낮은 기준 미만이면 이 후보는 불통과",
+          "두 능력치가 모두 높은 기준 이상이면 최종 후보 판정 확률 약 13.2%",
+          "한쪽만 높은 기준이고 다른 쪽이 낮은 기준이면 약 4.1%",
+          "두 능력치가 모두 낮은 기준만 충족하면 약 1.25%"
+        ],
+        "caution": "MAX 이벤트 공통 내부 게이지의 정확한 게임 내 명칭은 아직 확인되지 않았다. 다른 후보와의 경쟁까지 포함한 최종 발생률은 위 확률보다 달라질 수 있다."
+      }
+    }
+  }
+}

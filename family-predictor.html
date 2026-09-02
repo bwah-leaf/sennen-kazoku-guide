@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script>
+    if (window.location.protocol === "file:") {
+      window.location.replace("http://127.0.0.1:8765/family-predictor.html?v=save1");
+    }
+  </script>
+  <meta name="description" content="천년가족 세이브를 브라우저 안에서만 읽어 가족별 예정 상태 결과를 계산하는 로컬 도구">
+  <title>천년가족 세이브 파일로 가족 예측 — 로컬 미리보기</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=most-likely1">
+</head>
+<body class="guide-shell family-save-shell">
+  <header class="guide-header">
+    <nav class="site-nav" aria-label="주요 페이지">
+      <a href="preview.html">전체 이벤트 도감</a>
+      <a href="predictor.html">예정 이벤트 결과 예측</a>
+      <a class="is-current" href="family-predictor.html">세이브 파일로 가족 예측</a>
+    </nav>
+    <p class="eyebrow">CURRENT FAMILY SAVE PREDICTION</p>
+    <h1>세이브 파일로 가족 예측</h1>
+    <p>mGBA 상태저장(.ss0~.ss9)이나 게임 세이브(.sav)를 읽어 가족 구성원의 현재 예정 상태와 가능한 결과를 한꺼번에 표시합니다.</p>
+  </header>
+
+  <main class="family-save-main">
+    <section class="save-drop-panel">
+      <div class="section-heading">
+        <span>01</span>
+        <div><h2>세이브 파일 선택</h2><p>파일은 이 브라우저 탭 안에서만 해석되며 서버로 전송되지 않습니다.</p></div>
+      </div>
+      <label id="save-drop-zone" class="save-drop-zone" for="save-file">
+        <strong>.sav 또는 .ss0~.ss9 파일을 선택하세요</strong>
+        <span>여기로 끌어다 놓아도 됩니다.</span>
+        <input id="save-file" type="file" accept=".sav,.ss0,.ss1,.ss2,.ss3,.ss4,.ss5,.ss6,.ss7,.ss8,.ss9">
+      </label>
+      <div id="save-status" class="save-status" aria-live="polite">분석할 파일을 기다리는 중입니다.</div>
+    </section>
+
+    <section class="family-results-panel">
+      <div class="section-heading">
+        <span>02</span>
+        <div><h2>현재 가족의 예정 이벤트</h2><p>현재 수치로 ROM 후보표를 순서대로 계산합니다. 숨겨진 관계·일정 조건은 조건부 확률로 표시합니다.</p></div>
+      </div>
+      <div id="save-summary" class="save-summary"></div>
+      <div id="family-results" class="family-save-results">
+        <p class="empty-state">세이브를 선택하면 가족 구성원별 결과가 여기에 표시됩니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <section class="privacy-note">
+    <strong>완전한 로컬 처리</strong>
+    <p>선택한 세이브의 바이트는 네트워크 요청에 포함되지 않습니다. 페이지 데이터에는 한국어 이벤트 정보와 구조 메타데이터만 들어 있습니다.</p>
+  </section>
+  <section class="publication-notice">
+    <strong>비공식 팬 공략</strong>
+    <p>게임과 관련 명칭의 권리는 각 권리자에게 있습니다. 선택한 세이브는 브라우저 안에서만 처리되며 사이트로 전송되지 않습니다. 공개 내용에 관한 권리자의 요청은 공개 저장소의 Issues를 통해 접수하며, 확인 후 수정 또는 공개 중단을 검토합니다.</p>
+  </section>
+  <script>
+    window.PLANNED_STATES_URL = "assets/data/planned-states.json?v=save-key1";
+    window.FAMILY_SAVE_LAYOUT_URL = "assets/data/family-save-layout.json?v=save4";
+    window.ITEM_EFFECTS_URL = "assets/data/item-effects.json?v=items1";
+  </script>
+  <script src="assets/js/family-save-predictor.js?v=items1"></script>
+</body>
+</html>
