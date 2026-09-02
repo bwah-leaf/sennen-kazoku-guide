@@ -24,40 +24,6 @@
 판정에 관여하는 것으로 확인되면 `field_catalog`와 해당 이벤트의 `fields` 및 판정 정의를
 추가하는 방식으로 확장할 수 있습니다. 화면 마크업을 이벤트마다 다시 만들 필요가 없습니다.
 
-## 한국어 공개 데이터 다시 만들기
-
-프로젝트 루트에서 아래 명령을 실행합니다.
-
-```powershell
-python analysis/build_public_korean_guide.py
-```
-
-이 명령은 이미 생성된 내부 분석 JSON과 한국어 번역 결과를 읽어
-`guide_wiki/assets/data/events-ko.json`을 만듭니다. ROM은 읽거나 변경하지 않습니다.
-원문과 제어코드를 포함한 기존 내부 자료는 프로젝트의 `analysis/event_wiki/`에 보관하여
-공개 HTML 폴더와 물리적으로 분리합니다.
-
-아이템 효과 데이터는 다음 명령으로 별도 갱신합니다.
-
-```powershell
-python analysis/build_item_effect_data.py
-```
-
-고리류는 해당 능력치를 한 등급(+800, 최대 5000) 올린 뒤 확률을 다시 계산합니다.
-하트 열매나 사랑의 고리처럼 효과는 확인됐지만 현재 공개 입력에 대응하는 내부값이 없는
-아이템은 효과 설명과 미반영 사유를 함께 표시합니다.
-
-## 로컬에서 보기
-
-`run_preview.bat`을 실행하고 `http://127.0.0.1:8765/preview.html`을 엽니다. 예측기는
-`http://127.0.0.1:8765/predictor.html`에서 볼 수 있습니다.
-
-## GitHub Pages에 올리기
-
-1. 이 폴더의 공개 파일을 저장소 루트에 복사합니다.
-2. 저장소 Settings → Pages에서 `Deploy from a branch`를 선택합니다.
-3. 공개 브랜치의 `/ (root)`를 선택합니다.
-
 `analysis/event_wiki/events_with_source_legacy.json`은 내부 참고 파일이며 공개 폴더에
 복사하지 않습니다.
 
