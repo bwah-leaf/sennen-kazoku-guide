@@ -13,8 +13,8 @@
 
 ## 페이지
 
-- `preview.html`: 5,393개 이벤트를 한국어 제목·조건·UID로 검색하는 로컬 페이지
-- `events/index.md`: GitHub Pages용 이벤트 검색 페이지
+- `index.html`: 사이트 첫 화면이자 5,393개 이벤트를 한국어 제목·조건·UID로 검색하는 전체 이벤트 도감
+- `preview.html`: 이전 주소로 접속한 사용자를 `index.html`로 보내는 호환용 이동 페이지
 - `predictor.html`: 실행 직전 값과 아이템·화살 선택에 따른 이벤트 결과 예측 페이지
 - `family-predictor.html`: 사용자가 선택한 세이브를 브라우저 안에서만 해석하고 인물별 아이템 사용 전후를 비교하는 가족 예측 페이지
 - `assets/data/predictor-events.json`: 예측 이벤트·입력 필드·화살 효과·분기 정의
